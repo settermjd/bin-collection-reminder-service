@@ -1,0 +1,45 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}Unsubscribe{% endblock %}
+
+{% block content %}
+    <p class="text-sm text-slate-500 mb-2">You are here: <a class="hover:underline decoration-2 underline-offset-4 text-sky-800 decoration-sky-800 cursor-pointer transition duration-300 ease-in-out" href="{{ path('home') }}">home</a> > <span class="italic">unsubscribe</span></p>
+    <h2 class="mb-0.5 text-2xl font-bold py-2">Bin Collection Reminder - Unsubscribe</h2>
+    <ul class="list-inside list-disc">
+        <span class="">To unsubscribe:</span>
+        <li class="mt-2">Submit your email with the form below</li>
+        <li class="mt-2">
+            <a href="sms://+16175551212&?body=UNSUBSCRIBE"
+               class="hover:underline decoration-2 underline-offset-4 text-sky-800 decoration-sky-800 cursor-pointer transition duration-300 ease-in-out">SMS <code class="font-bold">UNSUBSCRIBE</code> to +16175551212</a>
+        </li>
+    </ul>
+    <hr class="mt-4 drop-shadow-sm">
+    <form action="/signup" method="post" class="my-4 mt-5">
+        <div class="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+            <div class="mb-3 w-full grow">
+                <label for="email" class="cursor-pointer">
+                    <span class="block mb-1">Your email address:</span>
+                </label>
+                <div class="relative text-gray-600 focus-within:text-gray-400">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-2">
+                        <div class="p-1 focus:outline-none focus:shadow-outline">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                    </div>
+                    <input id="email"
+                           type="email"
+                           name="email"
+                           placeholder="Your email address"
+                           class="pl-11 rounded-md border-2 border-slate-100 text-slate-800 p-3 w-full bg-slate-50 hover:bg-slate-100 focus:shadow-inner transition duration-150 ease-in-out">
+                </div>
+            </div>
+        </div>
+        <div class="mt-2 mb-1.5">
+            <input name="submit" type="submit" value="Unsubscribe"
+                   class="cursor-pointer rounded-md border-2 border-amber-600 hover:border-amber-700 bg-amber-600 hover:bg-amber-700 transition duration-300 ease-in-out font-bold w-full text-white p-3">
+        </div>
+        <p class="text-xs leading-normal ml-1 mt-3 text-slate-500">
+            If you change your mind, you can always <a href="{{ path('home') }}" class="hover:underline decoration-2 underline-offset-4 text-sky-800 decoration-sky-800 cursor-pointer transition duration-300 ease-in-out">subscribe again</a>.
+        </p>
+    </form>
+{% endblock %}

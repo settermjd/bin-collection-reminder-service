@@ -38,6 +38,7 @@ class ConfigProvider
                 Handler\SubscribeFormHandler::class => Handler\SubscribeFormHandlerFactory::class,
                 Handler\SubscribeConfirmationHandler::class => Handler\SubscribeConfirmationHandlerFactory::class,
                 Handler\UnsubscribeConfirmationHandler::class => Handler\UnsubscribeConfirmationHandlerFactory::class,
+                Handler\UnsubscribeFormHandler::class => Handler\UnsubscribeFormHandlerFactory::class,
             ],
         ];
     }

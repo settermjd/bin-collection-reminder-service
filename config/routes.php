@@ -39,8 +39,12 @@ use Settermjd\StaticPages\Handler\StaticPagesHandler;
  */
 
 return static function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
+    // Subscribe routes
     $app->get('/', App\Handler\SubscribeFormHandler::class, 'home');
     $app->get('/subscribe/confirmation', \App\Handler\SubscribeConfirmationHandler::class, 'subscribe.confirmation');
+
+    // Unsubscribe routes
+    $app->get('/unsubscribe', \App\Handler\UnsubscribeFormHandler::class, 'unsubscribe.form');
     $app->get('/unsubscribe/confirmation', \App\Handler\UnsubscribeConfirmationHandler::class, 'unsubscribe.confirmation');
 
     // Static routes
