@@ -4,22 +4,21 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>{% block title %}{% endblock %} - mezzio</title>
+    <title>{% block title %}{% endblock %} - Bin Collection Reminder Service</title>
     <link rel="stylesheet" href="/css/styles.css" />
     {% block stylesheets %}{% endblock %}
 </head>
-<body class="app">
-    <header class="app-header"></header>
+<body class="app flex flex-col h-screen text-slate-700">
+    <header class="app-header mb-2 bg-green-900 sticky top-0 bg-bin-pattern-100-25o drop-shadow-md shadow-md">
+        <h1 class="text-white text-center font-bold text-xl py-4"><a href="/">Your Regional Council</a></h1>
+    </header>
 
-    <div class="app-content">
-        <main class="container">
-            {% block content %}{% endblock %}
-        </main>
-    </div>
+    <main class="container mx-auto px-3 mt-2 mb-4 grow xl:max-w-screen-lg">
+        {% block content %}{% endblock %}
+    </main>
 
-    <footer class="app-footer">
+    <footer class="app-footer bg-gradient-to-b from-green-900 to-green-800 text-white text-sm px-3 py-3 mt-auto sticky bottom-0 bg-bin-pattern-100-25o">
         <div class="container">
-            <hr />
             {% block footer %}
                 <p>
                     &copy; {{ "now"|date("Y") }} <a href="https://matthewsetter.com">Matthew Setter</a>.
