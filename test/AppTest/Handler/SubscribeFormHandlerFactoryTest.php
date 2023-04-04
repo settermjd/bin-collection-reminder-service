@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace AppTest\Handler;
 
-use App\Handler\HomePageHandler;
-use App\Handler\HomePageHandlerFactory;
+use App\Handler\SubscribeFormHandler;
+use App\Handler\SubscribeFormHandlerFactory;
 use Mezzio\Router\RouterInterface;
 use Mezzio\Template\TemplateRendererInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
-class HomePageHandlerFactoryTest extends TestCase
+class SubscribeFormHandlerFactoryTest extends TestCase
 {
     /** @var ContainerInterface&MockObject */
     protected $container;
@@ -39,10 +39,10 @@ class HomePageHandlerFactoryTest extends TestCase
             ->with(RouterInterface::class)
             ->willReturn($this->router);
 
-        $factory  = new HomePageHandlerFactory();
+        $factory  = new SubscribeFormHandlerFactory();
         $homePage = $factory($this->container);
 
-        self::assertInstanceOf(HomePageHandler::class, $homePage);
+        self::assertInstanceOf(SubscribeFormHandler::class, $homePage);
     }
 
     public function testFactoryWithTemplate(): void
@@ -65,9 +65,9 @@ class HomePageHandlerFactoryTest extends TestCase
                 $renderer
             );
 
-        $factory  = new HomePageHandlerFactory();
+        $factory  = new SubscribeFormHandlerFactory();
         $homePage = $factory($this->container);
 
-        self::assertInstanceOf(HomePageHandler::class, $homePage);
+        self::assertInstanceOf(SubscribeFormHandler::class, $homePage);
     }
 }

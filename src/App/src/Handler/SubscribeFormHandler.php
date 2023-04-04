@@ -22,7 +22,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class HomePageHandler implements RequestHandlerInterface
+class SubscribeFormHandler implements RequestHandlerInterface
 {
     public function __construct(private ?TemplateRendererInterface $template = null) {}
 
@@ -30,6 +30,6 @@ class HomePageHandler implements RequestHandlerInterface
     {
         $data = [];
 
-        return new HtmlResponse($this->template->render('app::home-page', $data));
+        return new HtmlResponse($this->template->render('app::subscribe-form', $data));
     }
 }

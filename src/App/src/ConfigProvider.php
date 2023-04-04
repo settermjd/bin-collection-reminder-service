@@ -35,7 +35,7 @@ class ConfigProvider
                 Handler\PingHandler::class => Handler\PingHandler::class,
             ],
             'factories'  => [
-                Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
+                Handler\SubscribeFormHandler::class => Handler\SubscribeFormHandlerFactory::class,
                 Handler\SubscribeConfirmationHandler::class => Handler\SubscribeConfirmationHandlerFactory::class,
                 Handler\UnsubscribeConfirmationHandler::class => Handler\UnsubscribeConfirmationHandlerFactory::class,
             ],

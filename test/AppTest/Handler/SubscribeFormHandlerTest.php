@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AppTest\Handler;
 
-use App\Handler\HomePageHandler;
+use App\Handler\SubscribeFormHandler;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\JsonResponse;
 use Mezzio\Router\RouterInterface;
@@ -14,27 +14,19 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class HomePageHandlerTest extends TestCase
+class SubscribeFormHandlerTest extends TestCase
 {
     /** @var ContainerInterface&MockObject */
     protected $container;
 
-    /** @var RouterInterface&MockObject */
-    protected $router;
-
     protected function setUp(): void
     {
         $this->container = $this->createMock(ContainerInterface::class);
-        $this->router    = $this->createMock(RouterInterface::class);
     }
 
     public function testReturnsJsonResponseWhenNoTemplateRendererProvided(): void
     {
-        $homePage = new HomePageHandler(
-            $this->container::class,
-            $this->router,
-            null
-        );
+        $homePage = new SubscribeFormHandler(null);
         $response = $homePage->handle(
             $this->createMock(ServerRequestInterface::class)
         );
@@ -51,11 +43,7 @@ class HomePageHandlerTest extends TestCase
             ->with('app::home-page', $this->isType('array'))
             ->willReturn('');
 
-        $homePage = new HomePageHandler(
-            $this->container::class,
-            $this->router,
-            $renderer
-        );
+        $homePage = new SubscribeFormHandler($renderer);
 
         $response = $homePage->handle(
             $this->createMock(ServerRequestInterface::class)
