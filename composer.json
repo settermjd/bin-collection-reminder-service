@@ -94,7 +94,7 @@
         "cs-fix": "phpcbf",
         "serve": [
             "Composer\\Config::disableProcessTimeout",
-            "php -S 0.0.0.0:8080 -t public/"
+            "php -d error_reporting=E_ALL -d error_log=/tmp/php.error.log -S 0.0.0.0:8008 -t public/"
         ],
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
