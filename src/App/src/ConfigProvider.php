@@ -50,6 +50,7 @@ class ConfigProvider
                 'app'    => [__DIR__ . '/../templates/app'],
                 'error'  => [__DIR__ . '/../templates/error'],
                 'layout' => [__DIR__ . '/../templates/layout'],
+                'static-pages' => [__DIR__ . '/../templates/static-pages'],
             ],
         ];
     }
