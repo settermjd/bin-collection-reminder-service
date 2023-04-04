@@ -36,6 +36,8 @@ class ConfigProvider
             ],
             'factories'  => [
                 Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
+                Handler\SubscribeConfirmationHandler::class => Handler\SubscribeConfirmationHandlerFactory::class,
+                Handler\UnsubscribeConfirmationHandler::class => Handler\UnsubscribeConfirmationHandlerFactory::class,
             ],
         ];
     }

@@ -40,7 +40,13 @@ use Settermjd\StaticPages\Handler\StaticPagesHandler;
 
 return static function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
     $app->get('/', App\Handler\HomePageHandler::class, 'home');
-    $app->get('/api/ping', App\Handler\PingHandler::class, 'api.ping');
+    $app->get('/subscribe/confirmation', \App\Handler\SubscribeConfirmationHandler::class, 'subscribe.confirmation');
+    $app->get('/unsubscribe/confirmation', \App\Handler\UnsubscribeConfirmationHandler::class, 'unsubscribe.confirmation');
+
+    // Static routes
     $app->get('/privacy', StaticPagesHandler::class, 'static.privacy');
     $app->get('/terms', StaticPagesHandler::class, 'static.terms');
+
+    // Health routes
+    $app->get('/api/ping', App\Handler\PingHandler::class, 'api.ping');
 };

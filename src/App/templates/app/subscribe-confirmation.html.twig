@@ -1,0 +1,24 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}Subscribe Confirmation{% endblock %}
+
+{% block content %}
+    <p class="text-sm text-slate-500 mb-2">You are here: <a class="hover:underline decoration-2 underline-offset-4 text-sky-800 decoration-sky-800 cursor-pointer transition duration-300 ease-in-out" href="{{ path('home') }}">home</a> > <span class="italic">subscription confirmation</span></p>
+    <h2 class="mb-0.5 text-2xl font-bold py-2">Bin Collection Reminder Subscribe Confirmation</h2>
+    <p class="my-3">
+        Thanks for signing up to be notified about bin collections!
+        You'll receive notifications either by email or SMS on the first of the month, starting next month.
+    </p>
+    <p class="my-3">
+        If, at some point in the future, you no longer want to receive monthly reminders, <a class="hover:underline decoration-2 underline-offset-4 text-sky-800 decoration-sky-800 cursor-pointer transition duration-300 ease-in-out">click here to
+            unsubscribe</a>.
+    </p>
+    <p>Otherwise, if you have any questions, queries, or concerns, get in touch with us at any time by emailing <a href="mailto:bin-collection@your-regional-council.org" class="hover:underline decoration-2 underline-offset-4 text-sky-800 decoration-sky-800 cursor-pointer transition duration-300 ease-in-out">bin-collection@your-regional-council.org</a> or calling
+        <a href="tel:+16175551212" title="Call us if you have a question.">+16175551212</a>.</p>
+    <p class="my-3 bg-green-200 border-l-4 border-l-green-600 p-4">
+        Not sure about what to put in which bin?
+        <a class="hover:underline decoration-2 underline-offset-4 text-sky-800 decoration-sky-800 cursor-pointer transition duration-300 ease-in-out">Check out our helpful guide.</a>
+    </p>
+    <p class="font-bold my-6">Best,</p>
+    <p class="font-bold">Your Regional Council.</p>
+{% endblock %}
