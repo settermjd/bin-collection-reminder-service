@@ -35,10 +35,12 @@ class ConfigProvider
                 Handler\PingHandler::class => Handler\PingHandler::class,
             ],
             'factories'  => [
-                Handler\SubscribeFormHandler::class => Handler\SubscribeFormHandlerFactory::class,
                 Handler\SubscribeConfirmationHandler::class => Handler\SubscribeConfirmationHandlerFactory::class,
+                Handler\SubscribeFormHandler::class => Handler\SubscribeFormHandlerFactory::class,
+                Handler\SubscribeProcessorHandler::class => Handler\SubscribeProcessorHandlerFactory::class,
                 Handler\UnsubscribeConfirmationHandler::class => Handler\UnsubscribeConfirmationHandlerFactory::class,
                 Handler\UnsubscribeFormHandler::class => Handler\UnsubscribeFormHandlerFactory::class,
+                Handler\UnsubscribeProcessorHandler::class => Handler\UnsubscribeProcessorHandlerFactory::class,
             ],
         ];
     }

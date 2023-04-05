@@ -14,7 +14,7 @@
         </li>
     </ul>
     <hr class="mt-4 drop-shadow-sm">
-    <form action="/signup" method="post" class="my-4 mt-5">
+    <form action="{{ path('unsubscribe.processor') }}" method="post" class="my-4 mt-5">
         <div class="flex flex-col md:flex-row items-center gap-2 md:gap-4">
             <div class="mb-3 w-full grow">
                 <label for="email" class="cursor-pointer">

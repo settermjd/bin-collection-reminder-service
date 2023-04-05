@@ -6,8 +6,9 @@
     <h2 class="mb-0.5 text-2xl font-bold py-2">Bin Collection Reminder Service - Subscribe</h2>
     <p class="text-slate-800">
         <span class="font-bold">Don't miss a bin pick-up!</span>
-        Subscribe using the form below to be reminded by email <span class="italic">or</span> SMS when your next collection day is.</p>
-    <form action="/signup" method="post" class="my-4 mt-5">
+        Subscribe using the form below to be reminded by email <span class="italic">or</span> SMS when your next collection day is.
+    </p>
+    <form action="{{ path('subscribe.processor') }}" method="post" class="my-4 mt-5">
         <div class="mb-4">
             <label for="address" class="cursor-pointer">
                 <span class="block mb-1">Your address:</span>
