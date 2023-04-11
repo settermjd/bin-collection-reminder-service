@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Handler;
 
 use Laminas\Diactoros\Response\HtmlResponse;
+use Mezzio\Flash\FlashMessageMiddleware;
+use Mezzio\Flash\FlashMessagesInterface;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -17,6 +19,17 @@ class UnsubscribeFormHandler implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
     {
-        return new HtmlResponse($this->template->render('app::unsubscribe-form', []));
+        $data = [];
+
+        /** @var FlashMessagesInterface $flashMessages */
+        $flashMessages = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
+        if (! is_null($flashMessages)) {
+            $messages = $flashMessages->getFlashes();
+            if (array_key_exists('errors', $messages)) {
+                $data['errors'] = $messages['errors'];
+            }
+        }
+
+        return new HtmlResponse($this->template->render('app::unsubscribe-form', $data));
     }
 }

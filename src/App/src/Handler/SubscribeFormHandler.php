@@ -9,6 +9,8 @@ use DI\Container as PHPDIContainer;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\ServiceManager\ServiceManager;
+use Mezzio\Flash\FlashMessageMiddleware;
+use Mezzio\Flash\FlashMessagesInterface;
 use Mezzio\LaminasView\LaminasViewRenderer;
 use Mezzio\Plates\PlatesRenderer;
 use Mezzio\Router\FastRouteRouter;
@@ -29,6 +31,15 @@ class SubscribeFormHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $data = [];
+
+        /** @var FlashMessagesInterface $flashMessages */
+        $flashMessages = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
+        if (! is_null($flashMessages)) {
+            $messages = $flashMessages->getFlashes();
+            if (array_key_exists('errors', $messages)) {
+                $data['errors'] = $messages['errors'];
+            }
+        }
 
         return new HtmlResponse($this->template->render('app::subscribe-form', $data));
     }
