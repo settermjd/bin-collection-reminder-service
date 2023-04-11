@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    label.error {
+        @apply text-red-900 font-bold;
+    }
+
+    input {
+        @apply pl-16 rounded-md border-2 p-3 w-full focus:shadow-inner transition duration-150 ease-in-out;
+    }
+
+    input.default {
+        @apply border-slate-100 text-slate-800 bg-slate-50 hover:bg-slate-100;
+    }
+
+    input.error {
+        @apply border-red-400 bg-red-200 text-red-900 placeholder:text-red-900;
+    }
+}
