@@ -51,13 +51,17 @@
         "laminas/laminas-component-installer": "^2.6 || ^3.0",
         "laminas/laminas-config-aggregator": "^1.6",
         "laminas/laminas-diactoros": "^2.7",
+        "laminas/laminas-inputfilter": "^2.24",
         "laminas/laminas-servicemanager": "^3.4",
         "laminas/laminas-stdlib": "^3.6",
         "mezzio/mezzio": "^3.7",
         "mezzio/mezzio-fastroute": "^3.0.3",
+        "mezzio/mezzio-flash": "^1.6",
         "mezzio/mezzio-helpers": "^5.7",
+        "mezzio/mezzio-session-ext": "^1.16",
         "mezzio/mezzio-twigrenderer": "^2.6",
-        "settermjd/laminas-static-pages": "^0.0.7"
+        "settermjd/laminas-static-pages": "^0.0.7",
+        "symfony/console": "^6.0"
     },
     "require-dev": {
         "laminas/laminas-development-mode": "^3.3.0",
