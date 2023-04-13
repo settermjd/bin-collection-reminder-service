@@ -13,6 +13,7 @@
         "psr-11",
         "psr-15"
     ],
+    "minimum-stability": "dev",
     "homepage": "https://mezzio.dev",
     "support": {
         "docs": "https://docs.mezzio.dev/mezzio/",
@@ -28,9 +29,6 @@
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "composer/package-versions-deprecated": true,
             "laminas/laminas-component-installer": true
-        },
-        "platform": {
-            "php": "8.0.99"
         }
     },
     "extra": {
@@ -60,7 +58,9 @@
         "mezzio/mezzio-helpers": "^5.7",
         "mezzio/mezzio-session-ext": "^1.16",
         "mezzio/mezzio-twigrenderer": "^2.6",
+        "settermjd/laminas-openstreetmap": "dev-main",
         "settermjd/laminas-static-pages": "^0.0.7",
+        "skar/laminas-doctrine-orm": "dev-master",
         "symfony/console": "^6.0"
     },
     "require-dev": {
@@ -102,5 +102,11 @@
         ],
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "/opt/laminas-openstreetmap"
+        }
+    ]
 }
