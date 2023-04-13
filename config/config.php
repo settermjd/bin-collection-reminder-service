@@ -14,6 +14,7 @@ $cacheConfig = [
 ];
 
 $aggregator = new ConfigAggregator([
+    \Laminas\OpenStreetMap\ConfigProvider::class,
     \Skar\LaminasDoctrineORM\ConfigProvider::class,
     \Mezzio\Session\Ext\ConfigProvider::class,
     \Mezzio\Flash\ConfigProvider::class,
