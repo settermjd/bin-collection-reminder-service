@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Repository\UserRepository;
+use App\Repository\UserRepositoryFactory;
+
 /**
  * The configuration provider for the App module
  *
@@ -41,6 +44,7 @@ class ConfigProvider
                 Handler\UnsubscribeConfirmationHandler::class => Handler\UnsubscribeConfirmationHandlerFactory::class,
                 Handler\UnsubscribeFormHandler::class => Handler\UnsubscribeFormHandlerFactory::class,
                 Handler\UnsubscribeProcessorHandler::class => Handler\UnsubscribeProcessorHandlerFactory::class,
+                UserRepository::class => UserRepositoryFactory::class,
             ],
         ];
     }
