@@ -58,7 +58,7 @@
         "mezzio/mezzio-helpers": "^5.7",
         "mezzio/mezzio-session-ext": "^1.16",
         "mezzio/mezzio-twigrenderer": "^2.6",
-        "settermjd/laminas-openstreetmap": "dev-main",
+        "settermjd/laminas-openstreetmap": "^0.0.3",
         "settermjd/laminas-static-pages": "^0.0.7",
         "skar/laminas-doctrine-orm": "dev-master",
         "symfony/console": "^6.0"
@@ -102,11 +102,5 @@
         ],
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "/opt/laminas-openstreetmap"
-        }
-    ]
+    }
 }
