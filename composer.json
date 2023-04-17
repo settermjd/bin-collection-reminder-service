@@ -44,7 +44,7 @@
         }
     },
     "require": {
-        "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
+        "php": "^8.2.0",
         "composer/package-versions-deprecated": "^1.10.99",
         "laminas/laminas-component-installer": "^2.6 || ^3.0",
         "laminas/laminas-config-aggregator": "^1.6",
@@ -63,14 +63,19 @@
         "settermjd/laminas-static-pages": "^0.0.7",
         "skar/laminas-doctrine-orm": "dev-master",
         "symfony/console": "^6.0",
-        "twilio/sdk": "dev-main"
+        "twilio/sdk": "dev-main",
+        "vlucas/phpdotenv": "^5.5@dev"
     },
     "require-dev": {
+        "filp/whoops": "^2.7.1",
+        "laminas/laminas-coding-standard": "2.6.x-dev",
         "laminas/laminas-development-mode": "^3.3.0",
-        "phpunit/phpunit": "^9.5.11",
         "mezzio/mezzio-tooling": "^2.8",
+        "phpunit/phpunit": "^9.5.11",
+        "psalm/plugin-phpunit": "dev-master",
         "roave/security-advisories": "dev-master",
-        "filp/whoops": "^2.7.1"
+        "squizlabs/php_codesniffer": "^3.0@dev",
+        "vimeo/psalm": "^5.0@dev"
     },
     "autoload": {
         "psr-4": {
@@ -102,6 +107,7 @@
             "Composer\\Config::disableProcessTimeout",
             "php -d error_reporting=E_ALL -d error_log=/tmp/php.error.log -S 0.0.0.0:8008 -t public/"
         ],
+        "static-analysis": "psalm --shepherd --stats",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     }
