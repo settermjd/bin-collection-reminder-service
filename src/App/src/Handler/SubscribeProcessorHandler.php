@@ -4,51 +4,64 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
+use App\Entity\User;
 use App\InputFilter\SubscribeUserInputFilter;
+use Doctrine\ORM\EntityManager;
 use Laminas\Diactoros\Response\RedirectResponse;
-use Mezzio\Flash\FlashMessageMiddleware;
-use Mezzio\Flash\FlashMessagesInterface;
+use Laminas\OpenStreetMap\Format\ResponseFormat;
+use Laminas\OpenStreetMap\OpenStreetMap;
+use Laminas\OpenStreetMap\Result\Search\SearchOptions;
 use Mezzio\Helper\UrlHelper;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
+use function strtolower;
+
 class SubscribeProcessorHandler implements MiddlewareInterface
 {
-    private UrlHelper $helper;
+    use ProcessorHandlerTrait;
 
-    public function __construct(UrlHelper $helper)
-    {
-        $this->helper = $helper;
+    public function __construct(
+        private readonly UrlHelper $helper,
+        private readonly OpenStreetMap $openStreetMap,
+        private readonly EntityManager $entityManager,
+    ) {
     }
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $routeName = 'subscribe.confirmation';
+        $requestData = $request->getParsedBody();
+        $routeName   = 'home';
 
         $inputFilter = new SubscribeUserInputFilter();
-        $inputFilter->setData($request->getParsedBody());
-
-        if (! $inputFilter->isValid()) {
-            /** @var FlashMessagesInterface $flashMessages */
-            $flashMessages = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
-            if (! is_null($flashMessages)) {
-                $errorList = [];
-                $errors = $inputFilter->getMessages();
-                array_walk_recursive($errors, function ($item) use (&$errorList)
-                {
-                    $errorList[] = $item;
-                },
-                    $errorList
+        $inputFilter->setData($requestData);
+        if ($inputFilter->isValid()) {
+            $searchResult = $this->openStreetMap
+                ->search(
+                    $requestData['address'],
+                    ResponseFormat::JSON,
+                    limit: 1,
+                    searchOptions: new SearchOptions(
+                        showAddressDetails: true,
+                        deDupeResults: true
+                    ),
                 );
-                $flashMessages->flash('errors', $errorList);
-            }
-            $routeName = 'home';
+
+            $user = new User(
+                suburb: strtolower($searchResult[0]->getAddress()->getSuburb()),
+                email: $requestData['email'] ?? null,
+                mobile: $requestData['mobile'] ?? null,
+                fullName: $requestData['fullName'] ?? null,
+            );
+
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+        } else {
+            $this->setFlashMessage($request, $inputFilter);
         }
 
-        return new RedirectResponse(
-            $this->helper->generate($routeName)
-        );
+        return new RedirectResponse($this->helper->generate($routeName));
     }
 }

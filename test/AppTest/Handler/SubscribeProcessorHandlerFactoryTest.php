@@ -6,6 +6,7 @@ namespace AppTest\Handler;
 
 use App\Handler\SubscribeProcessorHandler;
 use App\Handler\SubscribeProcessorHandlerFactory;
+use Doctrine\ORM\EntityManager;
 use Laminas\OpenStreetMap\OpenStreetMap;
 use Mezzio\Helper\UrlHelper;
 use PHPUnit\Framework\TestCase;
@@ -17,11 +18,12 @@ class SubscribeProcessorHandlerFactoryTest extends TestCase
     {
         $container = $this->createMock(ContainerInterface::class);
         $container
-            ->expects($this->atMost(2))
+            ->expects($this->atMost(3))
             ->method('get')
             ->willReturnOnConsecutiveCalls(
                 $this->createMock(UrlHelper::class),
                 $this->createMock(OpenStreetMap::class),
+                $this->createMock(EntityManager::class),
             );
 
         $factory = new SubscribeProcessorHandlerFactory();
