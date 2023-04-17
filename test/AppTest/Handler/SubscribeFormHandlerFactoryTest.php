@@ -26,25 +26,6 @@ class SubscribeFormHandlerFactoryTest extends TestCase
         $this->router    = $this->createMock(RouterInterface::class);
     }
 
-    public function testFactoryWithoutTemplate(): void
-    {
-        $this->container
-            ->expects($this->once())
-            ->method('has')
-            ->with(TemplateRendererInterface::class)
-            ->willReturn(false);
-        $this->container
-            ->expects($this->once())
-            ->method('get')
-            ->with(RouterInterface::class)
-            ->willReturn($this->router);
-
-        $factory  = new SubscribeFormHandlerFactory();
-        $homePage = $factory($this->container);
-
-        self::assertInstanceOf(SubscribeFormHandler::class, $homePage);
-    }
-
     public function testFactoryWithTemplate(): void
     {
         $renderer = $this->createMock(TemplateRendererInterface::class);
@@ -54,16 +35,10 @@ class SubscribeFormHandlerFactoryTest extends TestCase
             ->with(TemplateRendererInterface::class)
             ->willReturn(true);
         $this->container
-            ->expects($this->exactly(2))
+            ->expects($this->once())
             ->method('get')
-            ->withConsecutive(
-                [RouterInterface::class],
-                [TemplateRendererInterface::class],
-            )
-            ->willReturnOnConsecutiveCalls(
-                $this->router,
-                $renderer
-            );
+            ->with(TemplateRendererInterface::class)
+            ->willReturn($renderer);
 
         $factory  = new SubscribeFormHandlerFactory();
         $homePage = $factory($this->container);

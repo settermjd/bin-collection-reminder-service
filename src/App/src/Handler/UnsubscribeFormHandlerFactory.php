@@ -7,9 +7,11 @@ namespace App\Handler;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerInterface;
 
+use function assert;
+
 class UnsubscribeFormHandlerFactory
 {
-    public function __invoke(ContainerInterface $container) : UnsubscribeFormHandler
+    public function __invoke(ContainerInterface $container): UnsubscribeFormHandler
     {
         $template = $container->has(TemplateRendererInterface::class)
             ? $container->get(TemplateRendererInterface::class)
