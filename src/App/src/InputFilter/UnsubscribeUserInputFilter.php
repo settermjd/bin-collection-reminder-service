@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\InputFilter;
 
 use Laminas\Filter\StringTrim;
@@ -7,7 +9,6 @@ use Laminas\Filter\StripTags;
 use Laminas\InputFilter\Input;
 use Laminas\InputFilter\InputFilter;
 use Laminas\Validator\EmailAddress;
-use Laminas\Validator\StringLength;
 
 class UnsubscribeUserInputFilter extends InputFilter
 {
@@ -16,11 +17,7 @@ class UnsubscribeUserInputFilter extends InputFilter
         $email = new Input('email');
         $email->setRequired(true);
         $email->getValidatorChain()
-            ->attach(new EmailAddress())
-            ->attach(new StringLength([
-                'min' => 10,
-                'max' => 20,
-            ]));
+            ->attach(new EmailAddress());
         $email->getFilterChain()
             ->attach(new StringTrim())
             ->attach(new StripTags());
