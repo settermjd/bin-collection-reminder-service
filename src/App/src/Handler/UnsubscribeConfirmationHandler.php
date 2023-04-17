@@ -13,9 +13,11 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class UnsubscribeConfirmationHandler implements MiddlewareInterface
 {
-    public function __construct(private ?TemplateRendererInterface $template = null) {}
+    public function __construct(private readonly TemplateRendererInterface $template)
+    {
+    }
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         return new HtmlResponse($this->template->render('app::unsubscribe-confirmation', []));
     }

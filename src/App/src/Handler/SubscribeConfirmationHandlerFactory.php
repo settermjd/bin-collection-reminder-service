@@ -7,14 +7,14 @@ namespace App\Handler;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerInterface;
 
+use function assert;
+
 class SubscribeConfirmationHandlerFactory
 {
-    public function __invoke(ContainerInterface $container) : SubscribeConfirmationHandler
+    public function __invoke(ContainerInterface $container): SubscribeConfirmationHandler
     {
-        $template = $container->has(TemplateRendererInterface::class)
-            ? $container->get(TemplateRendererInterface::class)
-            : null;
-        assert($template instanceof TemplateRendererInterface || null === $template);
+        $template = $container->get(TemplateRendererInterface::class);
+        assert($template instanceof TemplateRendererInterface);
 
         return new SubscribeConfirmationHandler($template);
     }
