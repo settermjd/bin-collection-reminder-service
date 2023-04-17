@@ -15,9 +15,6 @@ class UserRepositoryFactory
         /** @var EntityManager $entityManager */
         $entityManager = $container->get(EntityManager::class);
 
-        /** @var UserRepository $userRepository */
-        $userRepository = $entityManager->getRepository(User::class);
-
-        return $userRepository;
+        return $entityManager->getRepository(User::class);
     }
 }

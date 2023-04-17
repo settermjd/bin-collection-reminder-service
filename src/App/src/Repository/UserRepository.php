@@ -6,37 +6,36 @@ namespace App\Repository;
 
 use App\Entity\SuburbBinCollection;
 use App\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 
 class UserRepository extends EntityRepository
 {
-    /**
-     * @return array<int,User>
-     */
-    public function getMobileUsers(): array
+    public function getMobileUsers(): ArrayCollection
     {
         $queryBuilder = $this->_em->createQueryBuilder();
-        return $queryBuilder
-            ->select(['u', 's.collectedOn'])
+        $result       = $queryBuilder
+            ->select('u')
             ->from(User::class, 'u')
             ->leftJoin(SuburbBinCollection::class, 's')
             ->where($queryBuilder->expr()->isNotNull('u.mobile'))
             ->getQuery()
             ->getResult();
+
+        return new ArrayCollection($result);
     }
 
-    /**
-     * @return array<int,User>
-     */
-    public function getEmailUsers(): array
+    public function getEmailUsers(): ArrayCollection
     {
         $queryBuilder = $this->_em->createQueryBuilder();
-        return $queryBuilder
-            ->select(['u', 's.collectedOn'])
+        $result       = $queryBuilder
+            ->select('u')
             ->from(User::class, 'u')
             ->leftJoin(SuburbBinCollection::class, 's')
             ->where($queryBuilder->expr()->isNotNull('u.email'))
             ->getQuery()
             ->getResult();
+
+        return new ArrayCollection($result);
     }
 }
