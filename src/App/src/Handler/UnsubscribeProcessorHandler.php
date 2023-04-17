@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
-use App\InputFilter\SubscribeUserInputFilter;
+use App\Entity\User;
 use App\InputFilter\UnsubscribeUserInputFilter;
+use Doctrine\ORM\EntityManager;
 use Laminas\Diactoros\Response\RedirectResponse;
-use Mezzio\Flash\FlashMessageMiddleware;
-use Mezzio\Flash\FlashMessagesInterface;
 use Mezzio\Helper\UrlHelper;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -17,35 +16,33 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class UnsubscribeProcessorHandler implements MiddlewareInterface
 {
-    private UrlHelper $helper;
+    use ProcessorHandlerTrait;
 
-    public function __construct(UrlHelper $helper)
-    {
-        $this->helper = $helper;
+    public function __construct(
+        private readonly UrlHelper $helper,
+        private readonly EntityManager $entityManager
+    ) {
     }
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $routeName = 'unsubscribe.confirmation';
 
         $inputFilter = new UnsubscribeUserInputFilter();
         $inputFilter->setData($request->getParsedBody());
-
-        if (! $inputFilter->isValid()) {
-            /** @var FlashMessagesInterface $flashMessages */
-            $flashMessages = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
-            if (! is_null($flashMessages)) {
-                $errorList = [];
-                $errors = $inputFilter->getMessages();
-                array_walk_recursive($errors, function ($item) use (&$errorList)
-                    {
-                        $errorList[] = $item;
-                    },
-                    $errorList
+        if ($inputFilter->isValid()) {
+            $user = $this->entityManager
+                ->getRepository(User::class)
+                ->findOneBy(
+                    [
+                        'email' => $inputFilter->getValue('email'),
+                    ]
                 );
-                $flashMessages->flash('errors', $errorList);
-            }
+            $this->entityManager->remove($user);
+            $this->entityManager->flush();
+        } else {
             $routeName = 'unsubscribe.form';
+            $this->setFlashMessage($request, $inputFilter);
         }
 
         return new RedirectResponse(
