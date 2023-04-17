@@ -4,30 +4,26 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\ManyToOne;
-use Doctrine\ORM\Mapping\Table;
+use Doctrine\ORM\Mapping as ORM;
 
-#[Entity]
-#[Table(name: 'user')]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Table(name: 'user')]
 class User
 {
-    #[Column(name: 'full_name', type: Types::STRING, length: 100)]
+    #[ORM\Column(name: 'full_name', type: Types::STRING, length: 100)]
     private ?string $fullName;
 
-    #[Column(name: 'email', type: Types::STRING, length: 250, unique: true, nullable: true)]
+    #[ORM\Column(name: 'email', type: Types::STRING, length: 250, unique: true, nullable: true)]
     private ?string $email;
 
-    #[Column(name: 'mobile', type: Types::STRING, length: 14, unique: true, nullable: true)]
+    #[ORM\Column(name: 'mobile', type: Types::STRING, length: 14, unique: true, nullable: true)]
     private ?string $mobile;
 
-    #[Id]
-    #[ManyToOne(targetEntity: SuburbBinCollection::class)]
-    #[JoinColumn(name: 'suburb', referencedColumnName: 'suburb')]
+    #[ORM\Id]
+    #[ORM\ManyToOne(targetEntity: SuburbBinCollection::class)]
+    #[ORM\JoinColumn(name: 'suburb', referencedColumnName: 'suburb')]
     private ?SuburbBinCollection $suburbBinCollection = null;
 
     public function __construct(
@@ -37,10 +33,10 @@ class User
         ?string $fullName,
         ?int $id = null
     ) {
-        $this->id = $id;
-        $this->suburb = $suburb;
-        $this->email = $email;
-        $this->mobile = $mobile;
+        $this->id       = $id;
+        $this->suburb   = $suburb;
+        $this->email    = $email;
+        $this->mobile   = $mobile;
         $this->fullName = $fullName;
     }
 
@@ -69,4 +65,8 @@ class User
         return $this->fullName;
     }
 
+    public function getBinCollectionDay(): string
+    {
+        return $this->suburbBinCollection->getCollectedOn();
+    }
 }
