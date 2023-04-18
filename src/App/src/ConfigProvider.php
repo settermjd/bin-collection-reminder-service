@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Command\NotifyEmailSubscribersCommand;
+use App\Command\NotifyEmailSubscribersCommandFactory;
+use App\Command\NotifyMobileSubscribersCommand;
+use App\Command\NotifyMobileSubscribersCommandFactory;
 use App\Factory\SendGridFactory;
 use App\Factory\TwilioRestClientFactory;
 use App\Repository\UserRepository;
@@ -49,6 +53,8 @@ class ConfigProvider
                 Handler\UnsubscribeConfirmationHandler::class => Handler\UnsubscribeConfirmationHandlerFactory::class,
                 Handler\UnsubscribeFormHandler::class         => Handler\UnsubscribeFormHandlerFactory::class,
                 Handler\UnsubscribeProcessorHandler::class    => Handler\UnsubscribeProcessorHandlerFactory::class,
+                NotifyEmailSubscribersCommand::class          => NotifyEmailSubscribersCommandFactory::class,
+                NotifyMobileSubscribersCommand::class         => NotifyMobileSubscribersCommandFactory::class,
                 SendGrid::class                               => SendGridFactory::class,
                 UserRepository::class                         => UserRepositoryFactory::class,
             ],
@@ -62,9 +68,9 @@ class ConfigProvider
     {
         return [
             'paths' => [
-                'app'    => [__DIR__ . '/../templates/app'],
-                'error'  => [__DIR__ . '/../templates/error'],
-                'layout' => [__DIR__ . '/../templates/layout'],
+                'app'          => [__DIR__ . '/../templates/app'],
+                'error'        => [__DIR__ . '/../templates/error'],
+                'layout'       => [__DIR__ . '/../templates/layout'],
                 'static-pages' => [__DIR__ . '/../templates/static-pages'],
             ],
         ];
