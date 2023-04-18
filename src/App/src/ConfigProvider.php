@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Factory\SendGridFactory;
+use App\Factory\TwilioRestClientFactory;
 use App\Repository\UserRepository;
 use App\Repository\UserRepositoryFactory;
+use SendGrid;
+use Twilio\Rest\Client;
 
 /**
  * The configuration provider for the App module
@@ -38,13 +42,15 @@ class ConfigProvider
                 Handler\PingHandler::class => Handler\PingHandler::class,
             ],
             'factories'  => [
-                Handler\SubscribeConfirmationHandler::class => Handler\SubscribeConfirmationHandlerFactory::class,
-                Handler\SubscribeFormHandler::class => Handler\SubscribeFormHandlerFactory::class,
-                Handler\SubscribeProcessorHandler::class => Handler\SubscribeProcessorHandlerFactory::class,
+                Client::class                                 => TwilioRestClientFactory::class,
+                Handler\SubscribeConfirmationHandler::class   => Handler\SubscribeConfirmationHandlerFactory::class,
+                Handler\SubscribeFormHandler::class           => Handler\SubscribeFormHandlerFactory::class,
+                Handler\SubscribeProcessorHandler::class      => Handler\SubscribeProcessorHandlerFactory::class,
                 Handler\UnsubscribeConfirmationHandler::class => Handler\UnsubscribeConfirmationHandlerFactory::class,
-                Handler\UnsubscribeFormHandler::class => Handler\UnsubscribeFormHandlerFactory::class,
-                Handler\UnsubscribeProcessorHandler::class => Handler\UnsubscribeProcessorHandlerFactory::class,
-                UserRepository::class => UserRepositoryFactory::class,
+                Handler\UnsubscribeFormHandler::class         => Handler\UnsubscribeFormHandlerFactory::class,
+                Handler\UnsubscribeProcessorHandler::class    => Handler\UnsubscribeProcessorHandlerFactory::class,
+                SendGrid::class                               => SendGridFactory::class,
+                UserRepository::class                         => UserRepositoryFactory::class,
             ],
         ];
     }

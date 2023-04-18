@@ -11,6 +11,19 @@ chdir(dirname(__DIR__));
 require 'vendor/autoload.php';
 
 /**
+ * Load the project's environment variables
+ */
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+$dotenv->required([
+    'SENDGRID_API_KEY',
+    'SEND_FROM_EMAIL_ADDRESS',
+    'TWILIO_ACCOUNT_SID',
+    'TWILIO_AUTH_TOKEN',
+    'TWILIO_PHONE_NUMBER',
+]);
+
+/**
  * Self-called anonymous function that creates its own scope and keeps the global namespace clean.
  */
 (function () {
