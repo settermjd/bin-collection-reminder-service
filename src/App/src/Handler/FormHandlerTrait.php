@@ -16,12 +16,12 @@ trait FormHandlerTrait
 
         /** @var FlashMessagesInterface $flashMessages */
         $flashMessages = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
-
-        if (! $flashMessages === null) {
+        if ($flashMessages instanceof FlashMessagesInterface) {
             $messages       = $flashMessages->getFlashes();
             $data['errors'] = $messages['errors'] ?? '';
             $data['data']   = $messages['data'] ?? '';
         }
+
 
         return $data;
     }

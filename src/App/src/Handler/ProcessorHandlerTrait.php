@@ -25,7 +25,7 @@ trait ProcessorHandlerTrait
     {
         /** @var FlashMessagesInterface $flashMessages */
         $flashMessages = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
-        if (! $flashMessages === null) {
+        if ($flashMessages instanceof FlashMessagesInterface) {
             $flashMessages->flash('errors', $this->getFlattenedErrorsList($inputFilter->getMessages()));
             $flashMessages->flash('data', $inputFilter->getValues());
         }
