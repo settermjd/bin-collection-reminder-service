@@ -48,61 +48,14 @@ use Settermjd\StaticPages\Handler\StaticPagesHandler;
 
 return static function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
     // Subscribe routes
-    $app->get(
-        '/',
-        [
-            SessionMiddleware::class,
-            FlashMessageMiddleware::class,
-            SubscribeFormHandler::class,
-        ],
-        'home'
-    );
-    $app->post(
-        '/subscribe',
-        [
-            SessionMiddleware::class,
-            FlashMessageMiddleware::class,
-            SubscribeProcessorHandler::class,
-        ],
-        'subscribe.processor'
-    );
-    $app->get(
-        '/subscribe/confirmation',
-        [
-            SessionMiddleware::class,
-            FlashMessageMiddleware::class,
-            SubscribeConfirmationHandler::class,
-        ],
-        'subscribe.confirmation'
-    );
+    $app->get('/', SubscribeFormHandler::class, 'home');
+    $app->post('/subscribe', SubscribeProcessorHandler::class, 'subscribe.processor');
+    $app->get('/subscribe/confirmation', SubscribeConfirmationHandler::class, 'subscribe.confirmation');
 
     // Unsubscribe routes
-    $app->get(
-        '/unsubscribe',
-        [
-            SessionMiddleware::class,
-            FlashMessageMiddleware::class,
-            UnsubscribeFormHandler::class,
-        ],
-        'unsubscribe.form');
-    $app->post(
-        '/unsubscribe',
-        [
-            SessionMiddleware::class,
-            FlashMessageMiddleware::class,
-            UnsubscribeProcessorHandler::class,
-        ],
-        'unsubscribe.processor'
-    );
-    $app->get(
-        '/unsubscribe/confirmation',
-        [
-            SessionMiddleware::class,
-            FlashMessageMiddleware::class,
-            UnsubscribeConfirmationHandler::class,
-        ],
-        'unsubscribe.confirmation'
-    );
+    $app->get('/unsubscribe', UnsubscribeFormHandler::class, 'unsubscribe.form');
+    $app->post('/unsubscribe', UnsubscribeProcessorHandler::class, 'unsubscribe.processor');
+    $app->get('/unsubscribe/confirmation', UnsubscribeConfirmationHandler::class, 'unsubscribe.confirmation');
 
     // Static routes
     $app->get('/privacy', StaticPagesHandler::class, 'static.privacy');

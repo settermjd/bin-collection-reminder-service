@@ -67,6 +67,9 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     // - route-based validation
     // - etc.
 
+    $app->pipe(\Mezzio\Session\SessionMiddleware::class);
+    $app->pipe(\Mezzio\Flash\FlashMessageMiddleware::class);
+
     // Register the dispatch middleware in the middleware pipeline
     $app->pipe(DispatchMiddleware::class);
 
