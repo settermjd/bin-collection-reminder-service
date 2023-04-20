@@ -46,7 +46,6 @@ class ConfigProvider
                 Handler\PingHandler::class => Handler\PingHandler::class,
             ],
             'factories'  => [
-                Client::class                                 => TwilioRestClientFactory::class,
                 Handler\SubscribeConfirmationHandler::class   => Handler\SubscribeConfirmationHandlerFactory::class,
                 Handler\SubscribeFormHandler::class           => Handler\SubscribeFormHandlerFactory::class,
                 Handler\SubscribeProcessorHandler::class      => Handler\SubscribeProcessorHandlerFactory::class,
@@ -55,7 +54,6 @@ class ConfigProvider
                 Handler\UnsubscribeProcessorHandler::class    => Handler\UnsubscribeProcessorHandlerFactory::class,
                 NotifyEmailSubscribersCommand::class          => NotifyEmailSubscribersCommandFactory::class,
                 NotifyMobileSubscribersCommand::class         => NotifyMobileSubscribersCommandFactory::class,
-                SendGrid::class                               => SendGridFactory::class,
                 UserRepository::class                         => UserRepositoryFactory::class,
             ],
         ];

@@ -58,12 +58,12 @@
         "mezzio/mezzio-helpers": "^5.7",
         "mezzio/mezzio-session-ext": "^1.16",
         "mezzio/mezzio-twigrenderer": "^2.6",
-        "sendgrid/sendgrid": "dev-main",
         "settermjd/laminas-openstreetmap": "^0.0.3",
+        "settermjd/laminas-sendgrid-integration": "*",
         "settermjd/laminas-static-pages": "^0.0.7",
+        "settermjd/laminas-twilio-integration": "*",
         "skar/laminas-doctrine-orm": "dev-master",
         "symfony/console": "^6.0",
-        "twilio/sdk": "dev-main",
         "vlucas/phpdotenv": "^5.5@dev"
     },
     "require-dev": {

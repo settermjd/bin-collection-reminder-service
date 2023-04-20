@@ -14,6 +14,8 @@ $cacheConfig = [
 ];
 
 $aggregator = new ConfigAggregator([
+    \Laminas\Twilio\ConfigProvider::class,
+    \Laminas\SendGrid\ConfigProvider::class,
     \Laminas\Hydrator\ConfigProvider::class,
     \Laminas\OpenStreetMap\ConfigProvider::class,
     \Skar\LaminasDoctrineORM\ConfigProvider::class,
