@@ -11,9 +11,7 @@ class SendGridFactory
 {
     public function __invoke(ContainerInterface $container): SendGrid
     {
-        [
-            'api_key' => $apiKey,
-        ] = $container->get('config')['sendgrid'];
+        ['api_key' => $apiKey] = $container->get('config')['sendgrid'];
 
         return new SendGrid($apiKey);
     }

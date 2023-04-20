@@ -22,7 +22,6 @@ trait FormHandlerTrait
             $data['data']   = $messages['data'] ?? '';
         }
 
-
         return $data;
     }
 }
